@@ -14,7 +14,7 @@ let artificialIntelligenceResponses = [ //Intelligent responses to any kind of q
 ];
 
 try {
-    let token = fs.readFileSync("token.txt");
+    let token = fs.readFileSync("token.txt", {encoding: "utf8"});
     //File exists
     runBot(token);
 
@@ -28,7 +28,11 @@ function runBot(token) {
             console.log("Logging error: " + err);
             process.exit(1);
         }
-        console.log("Logging succesful!")
+        console.log("Logging succesful!");
+    });
+
+    bot.on("ready", () => {
+        console.log("Bot ready!");
     });
 
     bot.on("message", (msg) => {
