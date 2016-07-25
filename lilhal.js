@@ -14,7 +14,7 @@ let artificialIntelligenceResponses = [ //Intelligent responses to any kind of q
 ];
 
 try {
-    let token = fs.readFileSync("token.txt");
+    let token = fs.readFileSync("token.txt", {encoding: 'ascii'});
     //File exists
     runBot(token);
 
