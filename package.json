@@ -1,0 +1,15 @@
+{
+  "name": "lilhal",
+  "version": "0.720.413",
+  "description": "Discord bot that replaces you when you are not online",
+  "main": "lilhal.js",
+  "author": "jdev6",
+  "scripts": {
+    "start": "node lilhal.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "8.0.0",
+    "read": "1.0.7"
+  }
+}
