@@ -9,7 +9,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "discord.js": "8.0.0",
-    "read": "1.0.7"
+    "discord.js": "8.0.0"
   }
 }

@@ -1,7 +1,5 @@
 let Discord = require("discord.js");
 let fs = require("fs");
-let read = require("read");
-
 let bot = new Discord.Client();
 
 let user, password;
@@ -16,49 +14,25 @@ let artificialIntelligenceResponses = [ //Intelligent responses to any kind of q
 ];
 
 try {
-    fs.statSync("login.txt");
+    let token = fs.readFileSync("token.txt");
     //File exists
-    let login = fs.readFileSync("login.txt", "utf8");
-    [user, password] = login.split("\n");
-    runBot();
+    runBot(token);
 
 } catch(err) {
-    //File doesn't exist
-    read({
-        prompt: "Enter your discord username/email: "
-    }, (err, input) => {
-        if (err) {
-            console.log(err);
-            process.exit(1);
-        }
-
-        user = input;
-        read({
-            prompt: "Enter your discord password here: ",
-            silent: true
-        }, (err, input) => {
-            if (err) {
-                console.log(err);
-                process.exit(1);
-            }
-
-            password = input;
-            runBot();
-        });
-    });
+    console.log(err);
 }
 
-function runBot() {
-    bot.login(user, password).then(() => {
-        console.log("Logging succesful!");
-    })
-    .catch((err) => {
-        console.log(err);
-        process.exit(1);
+function runBot(token) {
+    bot.loginWithToken(token, (err, token) => {
+        if (err) {
+            console.log("Logging error: " + err);
+            process.exit(1);
+        }
+        console.log("Logging succesful!")
     });
 
     bot.on("message", (msg) => {
-        if (msg.isMentioned(bot.user) && msg.author.id !== bot.user.id) {
+        if ((msg.server === null /*Direct message*/) || (msg.isMentioned(bot.user) && msg.author.id !== bot.user.id /*Mentioned*/)) {
             console.log("Pinged by " + msg.author.name);
             let response = generateAdvancedArtificialIntelligenceResponse();
             console.log("Response: " + response);
