@@ -6,7 +6,14 @@ let bot = new Discord.Client();
 
 let user, password;
 
-let artificialIntelligenceResponses = ["Hmm.", "Yes.", "Interesting."]; //Intelligent responses to any kind of question
+let artificialIntelligenceResponses = [ //Intelligent responses to any kind of question
+    "Hmm.",
+    "Yes.",
+    "Interesting.",
+    "I don't think so.",
+    "Maybe.",
+    "Who knows."
+];
 
 try {
     fs.statSync("login.txt");
